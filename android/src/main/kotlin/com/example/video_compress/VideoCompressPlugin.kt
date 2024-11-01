@@ -13,7 +13,7 @@ import com.otaliastudios.transcoder.strategy.RemoveTrackStrategy
 import com.otaliastudios.transcoder.strategy.TrackStrategy
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.BinaryMessenger
-import com.otaliastudios.transcoder.internal.Logger
+import com.otaliastudios.transcoder.internal.utils.Logger
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
@@ -140,6 +140,7 @@ class VideoCompressPlugin : MethodCallHandler, FlutterPlugin {
 
                 val dataSource = if (startTime != null || duration != null){
                     val source = UriDataSource(context, Uri.parse(path))
+                    Log.d(TAG, "Start: ${(1000 * 1000 * (startTime ?: 0)).toLong()};;;; ${(1000 * 1000 * (duration ?: 0)).toLong()}")
                     TrimDataSource(source, (1000 * 1000 * (startTime ?: 0)).toLong(), (1000 * 1000 * (duration ?: 0)).toLong())
                 }else{
                     UriDataSource(context, Uri.parse(path))
